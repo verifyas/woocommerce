@@ -1,12 +1,13 @@
 <?php
-
-if(!class_exists('WC_Gateway_Verify')) {
- class WC_Gateway_Verify extends WC_Payment_Gateway {
-       public function __construct() {
+if (!class_exists('WC_Gateway_Verify')) {
+    class WC_Gateway_Verify extends WC_Payment_Gateway
+    {
+        public function __construct()
+        {
             global $woocommerce;
 
             $this->id = 'verify';
-             $this->icon = apply_filters('woocommerce_verify_logo', 'wp-content/plugins/verify/assets/images/verify-logo.png');
+            $this->icon = apply_filters('woocommerce_verify_logo', 'wp-content/plugins/verify/assets/images/verify-logo.png');
 
             $this->has_fields = true;
 
@@ -28,7 +29,8 @@ if(!class_exists('WC_Gateway_Verify')) {
             }
         }
 
-        function payment_scripts() {
+        public function payment_scripts()
+        {
             global $woocommerce;
 
             if (!is_checkout()) {
@@ -36,10 +38,11 @@ if(!class_exists('WC_Gateway_Verify')) {
             }
 
             wp_enqueue_script('verify-checkout', plugins_url('verify/assets/js/checkout.js'), array('verify'), WC_VERSION, true);
-            wp_enqueue_style( 'verify', plugins_url( 'verify/assets/css/main.css'));
+            wp_enqueue_style('verify', plugins_url('verify/assets/css/main.css'));
         }
 
-        public function admin_options() {
+        public function admin_options()
+        {
             ?>
             <h3><?php _e('Verify Payments', 'woocommerce'); ?></h3>
             <table class="form-table">
@@ -48,7 +51,8 @@ if(!class_exists('WC_Gateway_Verify')) {
             <?php
         }
 
-        function init_form_fields() {
+        public function init_form_fields()
+        {
             $this->form_fields = array(
                 'enabled' => array(
                     'title' => __('Enable/Disable', 'woocommerce'),
@@ -65,7 +69,8 @@ if(!class_exists('WC_Gateway_Verify')) {
             );
         }
 
-        function payment_fields() {
+        public function payment_fields()
+        {
             global $woocommerce;
 
             if ($this->description) {
@@ -73,7 +78,8 @@ if(!class_exists('WC_Gateway_Verify')) {
             }
         }
 
-        function process_payment($order_id) {
+        public function process_payment($order_id)
+        {
             global $woocommerce;
 
             $order = new WC_Order($order_id);
@@ -84,7 +90,6 @@ if(!class_exists('WC_Gateway_Verify')) {
                 'redirect' => $this->get_return_url($order)
             );
         }
-
     }
 }
 new WC_Gateway_Verify();
