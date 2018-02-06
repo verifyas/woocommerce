@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Verify Payments
-Version: 0.0.1
+Version: 0.0.2
 Plugin URI: https://verify.as
-Author: Verify
-Author URI: https://verify.as
+Author: Verify Inc
+Author URI: https://verifypayments.com/
 License: MIT
 */
 
